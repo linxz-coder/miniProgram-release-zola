@@ -1,0 +1,6 @@
+<view class="container">
+  <view class="code-block">
+    <text>{{formattedContent}}</text>
+  </view>
+  <button class="copy-btn" type="primary" bindtap="copyContent">复制内容</button>
+</view>

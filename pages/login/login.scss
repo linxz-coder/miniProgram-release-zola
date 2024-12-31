@@ -1,0 +1,21 @@
+/* pages/login/login.wxss */
+
+page{
+    padding: 50rpx;
+    box-sizing: border-box;
+  }
+
+  .line {
+    margin-top: 50rpx;
+  }
+
+  .input-container {
+    background-color: #fff;
+    padding: 10rpx 30rpx;
+    margin: 20rpx 0;
+  }
+  
+  .password-input {
+    height: 88rpx;
+    line-height: 88rpx;
+  }

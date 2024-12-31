@@ -1,0 +1,21 @@
+<form bindsubmit="formSubmit">
+    <view class="page-section">
+        <view class="page-section-title">请填入用户信息</view>
+
+        <!-- 用户名 -->
+        <custom-cell placeholder="用户名" type="text" bind:input="onNameChange" value="{{name}}" />
+
+        <!-- 仓库名 -->
+        <custom-cell placeholder="仓库名" type="text" bind:input="onRepoChange" value="{{repo}}" />
+
+        <!-- 密码 -->
+        <view class="input-container">
+            <input type="password" placeholder="密码" bindinput="onPasswordChange" value="{{password}}" class="password-input" />
+        </view>
+
+        <!-- 分割线 -->
+        <view class="line"></view>
+
+        <button type="primary" formType="submit">确认登录</button>
+    </view>
+</form>

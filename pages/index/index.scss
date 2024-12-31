@@ -1,0 +1,18 @@
+@import "../../weui/dist/style/weui.wxss";
+
+page{
+  padding: 50rpx;
+  box-sizing: border-box;
+}
+
+.line {
+  margin-top: 50rpx;
+}
+
+.weui-textarea {
+  height: 400rpx;
+}
+
+.btn-area {
+  display: flex;
+}

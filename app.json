@@ -1,0 +1,18 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/index/index",
+    "pages/source-code/source-code",
+    "pages/article-list/article-list"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "Zola",
+    "navigationBarTextStyle": "black"
+  },
+  "usingComponents": {
+    "custom-cell": "./components/custom-cell/custom-cell",
+    "mp-weixin": "./components/mp-weixin/index"
+  }
+}

@@ -1,0 +1,50 @@
+<form catchsubmit="formSubmit" catchreset="formReset">
+  <view class="page-section">
+    <view class="page-section-title">创作信息</view>
+    <!-- 标题 -->
+    <custom-cell placeholder="标题" type="text" bind:input="onTitleChange" value="{{title}}"/>
+
+    <!-- 日期 -->
+    <custom-cell placeholder="请选择日期" type="date" bind:datechange="onDateChange" />
+
+    <!-- 作者 -->
+    <custom-cell placeholder="作者" type="text" bind:input="onAuthorsChange" />
+
+  </view>
+
+  <!-- 分割线 -->
+  <view class="line"></view>
+
+  <view class="page-section">
+    <view class="page-section-title">文章内容</view>
+
+    <!-- 文本框 -->
+    <view class="weui-cells weui-cells_form">
+      <view class="weui-cell weui-active">
+        <view class="weui-cell__bd">
+          <textarea class="weui-textarea" value="{{content}}" bindinput="onContentChange" />
+        </view>
+      </view>
+    </view>
+
+  </view>
+
+  <!-- 分割线 -->
+  <view class="line"></view>
+
+  <!-- tags -->
+  <view class="page-section">
+    <view class="page-section-title">Tags</view>
+    <!-- tags -->
+    <custom-cell placeholder="tags" type="text" value="{{tags}}" bind:input="onTagsChange" />
+  </view>
+
+  <!-- 分割线 -->
+  <view class="line"></view>
+
+  <view class="btn-area">
+    <button type="primary" formType="submit">上传文章</button>
+    <button bind:tap="viewArticles">查看文章</button>
+    <button bind:tap="checkSourceCode">查看源码</button>
+  </view>
+</form>
