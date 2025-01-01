@@ -22,7 +22,7 @@
     <view class="weui-cells weui-cells_form">
       <view class="weui-cell weui-active">
         <view class="weui-cell__bd">
-          <textarea class="weui-textarea" value="{{content}}" bindinput="onContentChange" />
+          <textarea maxlength="-1" class="weui-textarea" value="{{content}}" bindinput="onContentChange" />
         </view>
       </view>
     </view>

@@ -6,7 +6,7 @@
       <text>文章列表</text>
     </view>
     <view class="modal-body">
-      <scroll-view scroll-y class="scroll-container">
+      <scroll-view scroll-y enable-back-to-top class="scroll-container">
         <block wx:for="{{articleNames}}" wx:key="index">
           <view 
             class="list-item" 
@@ -16,6 +16,7 @@
             <text>{{index + 1}}. {{item}}</text>
           </view>
         </block>
+        <view style="height: 500rpx"></view> <!-- 设置底部空白，方便滚动到底部点击 -->
       </scroll-view>
     </view>
   </view>
