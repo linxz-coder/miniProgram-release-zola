@@ -14,5 +14,6 @@
   "usingComponents": {
     "custom-cell": "./components/custom-cell/custom-cell",
     "mp-weixin": "./components/mp-weixin/index"
-  }
+  },
+  "lazyCodeLoading": "requiredComponents"
 }
