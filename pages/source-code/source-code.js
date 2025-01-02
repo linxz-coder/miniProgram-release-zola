@@ -4,32 +4,30 @@ Page({
     formattedContent: ''
   },
 
-  onLoad: function (options) {
-    // url携带中文参数，需要解码。
-    const title = decodeURIComponent(options.title || '');
-    const date = decodeURIComponent(options.date || '');
-    const authors = decodeURIComponent(options.authors || '');
-    const tags = decodeURIComponent(options.tags || '');
-    const content = decodeURIComponent(options.content || '');
+  onLoad: function () {
 
-    // 处理 tags 字符串，转换为数组
-    const tagArray = tags ? tags.split(',').map(tag => tag.trim()) : [];
+    const EventChannel = this.getOpenerEventChannel()
 
-    // 生成格式化的内容
-    const formatted = this.generateFormattedContent({
-      title,
-      date,
-      authors: authors ? authors.split(',') : [],
-      tags: tagArray,
-      content
+    EventChannel.on('myEvent', (res) => {
+        console.log(res);
+        const { title, date, authors, tags, content } = res;
+
+        // 处理 tags 字符串，转换为数组
+        const tagArray = tags ? tags.split(',').map(tag => tag.trim()) : [];
+
+        // 生成格式化的内容
+        const formatted = this.generateFormattedContent({
+            title,
+            date,
+            authors: authors ? authors.split(',') : [],
+            tags: tagArray,
+            content
+        });
+    
+        this.setData({
+            formattedContent: formatted
+        });
     });
-
-    this.setData({
-      formattedContent: formatted
-    });
-
-
-
   },
 
   generateFormattedContent: function (data) {

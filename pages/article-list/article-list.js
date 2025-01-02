@@ -5,10 +5,12 @@ Page({
         selectedContent: "" // 当前选中的文章内容
     },
 
-    onLoad(options) {
-        // console.log(options)
-        if (options.article) {
-            const articles = JSON.parse(decodeURIComponent(options.article));
+    onLoad() {
+        const EventChannel = this.getOpenerEventChannel()
+
+        EventChannel.on('myEvent', (res) => {
+            console.log(res);
+            const { articles } = res;
 
             // 提取每个对象的 name 属性
             const articleNames = articles.map(item => item.name.replace('.md', ''));
@@ -17,7 +19,7 @@ Page({
                 articles,
                 articleNames
             });
-        }
+        });
     },
 
     

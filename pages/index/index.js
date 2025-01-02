@@ -16,7 +16,7 @@ Page({
             '自定义路径'
         ],
         // GitHub 配置
-        githubToken: "", // 需要替换成你的个人访问令牌
+        githubToken: "", 
         owner: "",
         repo: ""
     },
@@ -88,9 +88,9 @@ Page({
     },
 
     // 原有的重置函数
-    formReset: function () {
-        console.log('form发生了reset事件');
-    },
+    // formReset: function () {
+    //     console.log('form发生了reset事件');
+    // },
 
     // 原有的源码检查函数
     checkSourceCode() {
@@ -113,7 +113,15 @@ Page({
 
         // 跳转到源码页面，携带表单数据
         wx.navigateTo({
-            url: `/pages/source-code/source-code?title=${encodeURIComponent(title)}&date=${date}&authors=${encodeURIComponent(authors)}&content=${encodeURIComponent(content)}&tags=${encodeURIComponent(tags)}`
+            url:"/pages/source-code/source-code",
+            success(res){res.eventChannel.emit('myEvent', {
+                    title: title,
+                    date: date,
+                    authors: authors,
+                    content: content,
+                    tags: tags
+                })
+            }
         });
     },
 
@@ -167,10 +175,6 @@ tags = [${tagArray.map(tag => `"${tag}"`).join(', ')}]
 
 ${content}`;
 
-        // console.log('准备上传的数据:', {
-        //   formattedContent,
-        //   path
-        // });
 
         // 生成文件名（将标题转换为适合的文件名格式）
         const fileName = `${title.toLowerCase().replace(/\s+/g, '-')}.md`;
@@ -220,7 +224,6 @@ ${content}`;
                 "Accept": "application/vnd.github.v3+json"
             },
             success: (res) => {
-                // console.log('API响应:', res); // 添加日志
                 if (res.statusCode === 200) {
                     const articles = res.data.filter(file =>
                         file.name.endsWith('.md') && file.name !== '_index.md'
@@ -259,7 +262,13 @@ ${content}`;
         }
 
         wx.navigateTo({
-            url: `/pages/article-list/article-list?article=${encodeURIComponent(JSON.stringify(articles))}`,
+            url: "/pages/article-list/article-list",
+            success(res){
+                res.eventChannel.emit('myEvent', {
+                    articles: articles
+                })
+            }
+            // url: `/pages/article-list/article-list?article=${encodeURIComponent(JSON.stringify(articles))}`,
         });
 
     },
