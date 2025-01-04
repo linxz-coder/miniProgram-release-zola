@@ -268,7 +268,6 @@ ${content}`;
                     articles: articles
                 })
             }
-            // url: `/pages/article-list/article-list?article=${encodeURIComponent(JSON.stringify(articles))}`,
         });
 
     },
