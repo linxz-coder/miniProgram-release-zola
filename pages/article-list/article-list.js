@@ -99,14 +99,6 @@ Page({
         });
     },
 
-    // 进入编辑模式
-    startEditing() {
-        this.setData({
-            isEditing: true,
-            editingContent: this.data.selectedContent
-        });
-    },
-
     // 处理表单输入变化
     handleEditInput(e) {
         const {
@@ -125,12 +117,19 @@ Page({
         } = this.data;
 
         // 构建文章内容
-        const formattedContent = `+++
+        let frontMatter = `+++
 title = "${editForm.title}"
 date = ${editForm.date}
-authors = [${editForm.authors.split(',').map(author => `"${author.trim()}"`).join(', ')}]
+authors = [${editForm.authors.split(',').map(author => `"${author.trim()}"`).join(', ')}]`;
+
+        // 只有当tags存在且不为空时才添加tags部分
+        if (editForm.tags && editForm.tags.trim()) {
+            frontMatter += `
 [taxonomies]
-tags = [${editForm.tags.split(',').map(tag => `"${tag.trim()}"`).join(', ')}]
+tags = [${editForm.tags.split(',').map(tag => `"${tag.trim()}"`).join(', ')}]`;
+        }
+
+        const formattedContent = `${frontMatter}
 +++
 
 ${editForm.content}`;
@@ -170,13 +169,14 @@ ${editForm.content}`;
             },
             success: (res) => {
                 if (res.statusCode === 200) {
+                    this.setData({
+                        ['currentArticle.sha']: res.data.content.sha,
+                        isEditing: false,
+                        selectedContent: this.data.editForm.content
+                    });
                     wx.showToast({
                         title: '更新成功',
                         icon: 'success'
-                    });
-                    this.setData({
-                        isEditing: false,
-                        selectedContent: this.data.editForm.content
                     });
                 } else {
                     wx.showToast({

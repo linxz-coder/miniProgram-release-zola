@@ -26,8 +26,8 @@
     <view class="modal-header">
       <view class="header-title">{{editForm.title || '文章标题'}}</view>
       <view class="header-buttons">
-        <button wx:if="{{!isEditing}}" class="weui-btn weui-btn_primary weui-btn_medium" bindtap="startEditing">编辑</button>
-        <button class="weui-btn weui-btn_default weui-btn_medium" bindtap="closeContent">返回列表</button>
+        <button wx:if="{{!isEditing}}" type="primary" class="head-button" bindtap="startEditing">编辑</button>
+        <button class="head-button" type="default" bindtap="closeContent">返回列表</button>
       </view>
     </view>
     <view class="modal-body">
@@ -60,8 +60,8 @@
           </view>
           
           <view class="button-group">
-            <button class="weui-btn weui-btn_primary" bindtap="saveEdit">保存</button>
-            <button class="weui-btn weui-btn_default" bindtap="cancelEdit">取消</button>
+            <button class="head-button" type="primary" bindtap="saveEdit">保存</button>
+            <button class="head-button" type="default" bindtap="cancelEdit">取消</button>
           </view>
 
           <view style="height: 300rpx;"></view>
