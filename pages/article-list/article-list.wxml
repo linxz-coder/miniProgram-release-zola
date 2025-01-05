@@ -24,13 +24,54 @@
   <!-- 详情页覆盖层 -->
   <view class="modal-detail" wx:if="{{selectedContent}}">
     <view class="modal-header">
-      <text>文章详情</text>
-      <button class="weui-btn weui-btn_default weui-btn_medium" bindtap="closeContent">返回文章列表</button>
+      <view class="header-title">{{editForm.title || '文章标题'}}</view>
+      <view class="header-buttons">
+        <button wx:if="{{!isEditing}}" type="primary" class="head-button" bindtap="startEditing">编辑</button>
+        <button class="head-button" type="default" bindtap="closeContent">返回列表</button>
+      </view>
     </view>
     <view class="modal-body">
       <scroll-view scroll-y class="scroll-container">
-        <!-- <text class="article-content">{{selectedContent}}</text> -->
-        <mp-weixin use-anchor markdown content="{{selectedContent}}" />
+         <!-- 编辑模式 -->
+         <view wx:if="{{isEditing}}" class="edit-form">
+          <view class="form-item">
+            <text class="label">标题：</text>
+            <input class="input" value="{{editForm.title}}" data-field="title" bindinput="handleEditInput"/>
+          </view>
+          
+          <view class="form-item">
+            <text class="label">日期：</text>
+            <input class="input" value="{{editForm.date}}" data-field="date" bindinput="handleEditInput"/>
+          </view>
+          
+          <view class="form-item">
+            <text class="label">作者：</text>
+            <input class="input" value="{{editForm.authors}}" data-field="authors" bindinput="handleEditInput"/>
+          </view>
+          
+          <view class="form-item">
+            <text class="label">标签：</text>
+            <input class="input" value="{{editForm.tags}}" data-field="tags" bindinput="handleEditInput"/>
+          </view>
+          
+          <view class="form-item">
+            <text class="label">内容：</text>
+            <textarea class="textarea" value="{{editForm.content}}" data-field="content" bindinput="handleEditInput" maxlength="-1"/>
+          </view>
+          
+          <view class="button-group">
+            <button class="head-button" type="primary" bindtap="saveEdit">保存</button>
+            <button class="head-button" type="default" bindtap="cancelEdit">取消</button>
+          </view>
+
+          <view style="height: 300rpx;"></view>
+        </view>
+
+        <!-- 查看模式 -->
+        <view wx:else>
+            <mp-weixin use-anchor markdown content="{{selectedContent}}" />
+            <view style="height: 300rpx;"></view>
+        </view>
       </scroll-view>
     </view>
   </view>
